@@ -1,0 +1,61 @@
+C00B 000	jmp 	start 	skip around the variables
+0000 001 size	dw		int size;
+0000 002 inAm	dw 		int inAm;
+0000 003 i	dw		int i;
+0000 004 j	dw		int j;
+0000 005 x	dw		int x;
+0040 006 arr	dw		int arr[];
+0000 007 smone	dw		int size - 1;
+0000 008 zero 	dw 	0
+0001 009 one 	dw 	1
+4000 00A storit	dw 	4000
+3008 00B start	load	zero	inAm = 0;
+4002 00C	store	inAm
+1000 00D  	readH 		cin >> size;
+4001 00E 	store	size
+3001 018	load 	size	if(size - inAm == 0)
+6002 019	sub	inAm
+D01C 01A	jmpe		exit input loop
+300A 00F 	load 	adit 	form the instruction to add a[i]
+5006 010 	add 	arr
+5002 011	add 	inAm
+4014 012 	store 	doit 	plant the instruction into the program
+1000 013	readH	x	cin >> x;
+0000 014 doit 	dw 	0
+3002 015 	load	inAm	
+5009 016 	add	inAm	inAm++;
+4002 017	store	inAm
+C00F 01B	jmp		go up to another iteration of input
+3001 01C	load	size	size -= 1;
+6009 01D	sub	one
+4007 01E	store	smone
+3008 01F	load	zero	i = 0;
+4003 020	store	i
+C023 021	jmp
+3000 022 loadit	load
+3022 023 	load 	loadit 	form the instruction to load a[i]
+5006 024 	add 	arr
+5003 025	add 	i
+4027 026	store 	doit 	plant the instruction into the program
+0000 027 doit	dw	load
+1800 028 	print
+3007 029	load		if(smone - i == 0)
+6003 02A	sub
+D030 02B	jmpe
+3003 02C	load	i	i++
+5009 02D	add	1
+4003 02E	store	i
+C023 02F
+3022 030 	load 	loadit 	form the instruction to load a[i]
+5006 031 	add 	arr
+5007 032	add 	smone
+4034 033	store 	doit 	plant the instruction into the program
+0000 034 doit	dw	load
+1800 035 	print
+3007 036	load		if(smone == 0)
+D03C 037	jmpe
+3007 038	load
+6009 039	sub	one	smone--
+4007 03A	store	smone
+C030 03B
+0000 03C	halt

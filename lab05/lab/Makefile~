@@ -1,0 +1,23 @@
+# Sam Townsend
+# sft3hy
+# 10/3/2020
+# Makefile
+
+CXX=clang++ $(CXXFLAGS)
+CXXFLAGS=-Wall -O2# Enable all warnings
+OBJECTS = BSTPathTest.o BinaryNode.o BinarySearchTree.o
+DEBUG=-g
+
+BSTPathTest: $(OBJECTS)
+	$(CXX) $(DEBUG) $(OBJECTS) -o bst
+	@echo "BST compiled"
+
+BSTPathTest.o: BSTPathTest.cpp
+
+BinaryNode.o: BinaryNode.cpp
+
+BinarySearchTree.o: BinarySearchTree.cpp 
+
+.PHONY: clean
+clean:
+	-rm -f *.o *.~ bst

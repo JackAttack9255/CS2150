@@ -1,0 +1,106 @@
+C024 000	jmp 	start 	skip around the variables
+0000 001 i	dw		int i;
+0000 002 j	dw		int j;
+0100 003 a	dw		int a[];
+0000 004 inAm	dw		int inAm;
+B000 005
+0000 006 zero 	dw 	0
+0001 007 one 	dw 	1
+0008 008 eight	dw	8
+0009 009 nine	dw	9
+000A 00A ten	dw	10
+4000 00B storit1dw 	4000
+B000 00C
+3101 00D A[j]	dw		int A[j]
+3100 00E A[j-1] dw		int A[j-1]
+0000 00F temp	dw		int temp
+B000 010
+6101 011
+0000 012 
+4100 013
+4101 014
+B000 015
+B000 016
+B000 017
+B000 018
+B000 019
+B000 01A
+B000 01B
+B000 01C
+B000 01D
+B006 01E 
+B001 01F 	
+B000 020
+B009 021 	
+B002 022 	
+B000 023
+3006 024 start	load	zero	inAm = 0;
+4004 025 	store	inAm
+B000 026
+300B 027 	load 	storit 	form the instruction to add a[i]
+5003 028 	add 	a
+5004 029	add 	inAm
+402E 02A 	store 	doit 	plant the instruction into the program
+B000 02B
+1000 02C	readH	x	cin >> x;
+B000 02D
+0000 02E doit 	dw 	0
+3009 02F	load 	nine	if(nine - inAm == 0)
+6004 030	sub	inAm
+D036 031	jmpe		exit input loop
+3004 032 	load	inAm	
+5007 033 	add	1	inAm++;
+4004 034	store	inAm
+C027 035	jmp		go back up to read another value
+B000 036
+B000 037
+3006 038 	load	zero	i = 0;
+4001 039 	store	i
+3008 03A 	load	eight	j = 8;
+4002 03B 	store	j
+3001 03C	load	i	i++
+5007 03D	add	1
+4001 03E	store	i
+300D 03F	loadit1		instructions to load A[j]
+5008 040	add		+8
+4053 041
+B000 042
+300E 043	loadit2		instructions to load A[j-1]
+5008 044	add		+8
+4050 045
+4055 046
+3011 047	subit		instructions to subtract
+5008 048	add 		+8
+4051 049	store
+3013 04A	load storit1	instructions to store  A[j]
+5008 04B	add 8
+4056 04C	store
+3014 04D	load storit2 instructionsto store A[j-1]
+5008 04E	add 8
+4059 04F
+0000 050
+0000 051
+D058 052 jump past swap to increment
+0000 053
+400F 054
+0000 055
+0000 056
+300F 058
+0000 059
+B000 05A
+B000 05B
+B000 05C
+4002 05D load j			if(j - i <= 0)
+6001 05E subtract i
+D03B 05F go back up to outside loop
+E03B 060
+3002 061 load j
+6007 062 j--
+4002 063 store j
+B000 064
+B000 065
+300A 066 load ten		if( 10 - i <= 0)
+6001 067 subtract i
+D070 068 exit whole loop
+E070 069
+0000 06A	halt

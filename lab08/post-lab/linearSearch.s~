@@ -1,0 +1,14 @@
+	global _linearSearch
+
+	section .text
+
+
+	;; Parameter 1 is a pointer to the int array - rdi
+	;; Parameter 2 is size of array - rsi
+	;; Parameter 3 is element to find - rdx
+	
+_linearSearch:
+	
+
+_done:
+	ret

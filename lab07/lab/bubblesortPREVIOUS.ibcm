@@ -1,0 +1,89 @@
+C00C 000	jmp 	start 	skip around the variables
+0000 001 i	dw		int i;
+0000 002 j	dw		int j;
+0000 003 k	dw		int k;
+0000 004 l	dw		int l;
+005A 005 a	dw		int a[];
+0000 006 inAm	dw		int inAm;
+0000 007 zero 	dw 	0
+0001 008 one 	dw 	1
+0009 009 nine	dw	9
+000A 00A ten	dw	10
+4000 00B storit	dw 	4000
+3007 00C start	load	zero	i = 0;
+4001 00D 	store	i
+3009 00E 	load	nine	j = 9;
+4002 00F 	store	i
+3007 010 	load	zero	k = 0;
+4003 011 	store	i
+3007 012 	load	zero	l = 0;
+4003 013 	store	i
+3007 014 	load	zero	l = 0;
+4004 015 	store	l
+3007 016 	load	zero	l = 0;
+4006 017 	store	inAm
+300B 018 	load 	adit 	form the instruction to add a[i]
+5005 019 	add 	arr
+5006 01A	add 	inAm
+401D 01B 	store 	doit 	plant the instruction into the program
+1000 01C	readH	x	cin >> x;
+0000 01D doit 	dw 	0
+3009 01E	load 	nine	if(nine - inAm == 0)
+6006 01F	sub	inAm
+D025 020	jmpe		exit input loop
+3006 021 	load	inAm	
+5008 022 	add	inAm	inAm++;
+4006 023	store	inAm
+C018 024	jmp		go back up to read another value
+300A 025	load	ten	if(10 - i == 0)
+6001 026	sub	i
+D049 027	jmpe		exit outer loop
+3001 028 	load	i	i++
+5008 029	add	1
+4001 02A	store	i
+E049 02B	jmpl		exit
+D049 02C	jmpe		jmp to 
+C030 02D	jmp
+0000 02E tmp	dw	temp
+0000 02F tmpj-1	dw	tempj-1
+3005 030 	load	A[j]	int temp = A[j]
+5002 031	add
+4057 032	store
+3002 033 	load	j	tmpj-1 = j-1
+6008 034	sub	1
+402F 035	store	tmpj-1
+3005 036 	load	A[j]	A[j] = A[j-1]
+5032 037	add
+4005 038	store
+300B 039 	load 	adit 	form the instruction to load A[j-1]
+5005 03A 	add 	arr
+502F 03C	add 	j-1
+403F 03D 	store 	doit 	plant the instruction into the program
+302E 03E	load	temp	A[j-1] = temp
+0000 03F doit 	dw 	0
+3002 040 	load	j	j--
+6008 041	sub	1
+4002 042	store	j
+3002 043	load	j	if(j - i < 0)
+6001 044	sub	i
+E025 045	jmpe		exit inner loop
+C029 046	jmp		go up to inner loop
+C049 047	jmp
+3000 048 loadit	load
+3022 049 	load 	loadit 	form the instruction to load a[i]
+5006 04A 	add 	arr
+5001 04B	add 	i
+404D 04C	store 	doit 	plant the instruction into the program
+0000 04D doit	dw	load
+1800 04E 	print
+3009 04F	load		if(9 - k == 0)
+6003 050	sub
+D059 051	jmpe
+3003 052	load	k	k++
+5009 053	add	k
+4003 054	store	k
+C049 055	jmp		go up to iterate print loop
+C059 056	jmp		jump over variables
+0000 057 A[j]	dw
+0000 058 A[j-1]
+0000 059	halt

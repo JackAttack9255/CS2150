@@ -1,0 +1,26 @@
+//Sam Townsend
+//sft3hy
+//9/8/2020
+//LifeCycle.h
+
+using namespace std;
+
+// Declare the MyObject class
+
+class MyObject {
+public:
+    static int numObjs;
+
+    MyObject();                    // default constructor
+    MyObject(string n);            // constructor with name parameter
+    MyObject(const MyObject& rhs); // copy constructor
+    ~MyObject();                   // destructor
+
+    string getName() const;
+    void setName(const string& newName);
+
+    friend ostream& operator<<(ostream& output, const MyObject& obj);
+private:
+    string name;
+    int id;
+};

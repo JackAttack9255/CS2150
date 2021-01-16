@@ -1,0 +1,17 @@
+C004 000 	jump past variables
+0001 001 1	store one
+0010 002 s	store size of program
+3000 003 	loadit
+3002 004 	load size
+6011 005	go past end of program to grab a val and subtract it from size
+E010 006	if size - val < 0, halt
+3003 007	creating loadit instructions
+5011 008	add val
+400A 009	store instructions into next line
+300A 00A	load instructions into self
+1800 00B	print
+3011 00C	load val
+5001 00D	val++
+4011 00E	store val
+C004 00F	jump back up to print next line of program
+0000 010	halt

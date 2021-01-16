@@ -1,0 +1,134 @@
+C020 000	jmp 	start 	skip around the variables
+0000 001 i	dw		int i;
+0000 002 j	dw		int j;
+0090 003 a	dw		int a[];
+0000 004 inAm	dw		int inAm;
+0000 005 k	dw		int k; (for printing)
+0000 006 zero 	dw 	0
+0001 007 one 	dw 	1
+0008 008 eight	dw	8
+0009 009 nine	dw	9
+000A 00A ten	dw	10
+4000 00B storit1dw 	4000
+B000 00C
+3090 00D A[j]	dw		loadit for A[j]
+3090 00E A[j-1] dw		loadit for A[j-1]
+0000 00F temp	dw		int temp
+B000 010
+6090 011 subit A[j]
+0000 012 
+4090 013 storit2 A[j]
+4090 014 storit 3 A[j-1]
+B000 015
+0000 016 j-1	dw		int j-1;
+B000 017
+B000 018
+3000 019 loadit
+B008 01A
+B016 02B 
+0009 01C
+B000 01D
+B006 01E 
+B001 01F 	
+3006 020 start	load	zero	k = 0;
+4005 021 	store	k	
+B002 022 	
+B000 023
+3006 024 start	load	zero	inAm = 0;
+4004 025 	store	inAm
+B000 026
+300B 027 	load 	storit 	form the instruction to add a[i]
+5003 028	add 	a
+5004 029	add 	inAm
+402E 02A 	store 	doit 	plant the instruction into the program
+B000 02B
+1000 02C	readH	x	cin >> x;
+B000 02D
+0000 02E doit 	dw 	0
+3009 02F	load 	nine	if(nine - inAm == 0)
+6004 030	sub	inAm
+D036 031	jmpl		exit input loop
+3004 032 	load	inAm	
+5007 033 	add	1	inAm++;
+4004 034	store	inAm
+C027 035	jmp		go back up to read another value
+3006 036 	load	zero	i = 0;
+4001 037 	store	i
+3009 038 	load	nine	j = 9;
+4002 039 	store	j
+3008 03A load 8		j-1= 8
+4016 03B store into j-1
+B000 03C
+B000 03D
+B000 03E	
+300D 03F	loadit1		instructions to load A[j]
+5002 040	add		+j
+4054 041	store at mem 53
+B000 042
+300E 043	loadit2		instructions to load A[j-1]
+5016 044	add		+j-1
+4050 045	store at mem 50
+4056 046	store a second time at mem 55
+3011 047	subit		instructions to subtract A[j]
+5002 048	add 		+j
+4051 049	store
+3013 04A	load storit1	instructions to store  A[j]
+5002 04B	add j
+4057 04C	store at mem 56
+3014 04D	load storit2 instructionsto store A[j-1]
+5016 04E	add j-1
+405A 04F	store a second time at 59
+0000 050	load A[j-1]
+0000 051	subit (A[j]) if(A[j-1] - A[j] 
+D05C 052 jump past swap to decrement j
+E05C 053
+0000 054      load A[j]
+400F 055      store temp
+0000 056      second load A[j-1]
+0000 057      storit1 A[j]
+B000 058      
+300F 059      load temp
+0000 05A      storit2 A[j-1]
+B000 05B
+B000 05C
+3002 05D load j
+6007 05E j--
+4002 05F store j
+4002 060 load j		if(j - i <= 0)
+6001 061 subtract i
+E068 062 go out to outside loop (exit inner loop)
+D068 063 go out to outside loop (exit inner loop)
+3016 064 load j-1
+6007 065 (j-1)--
+4016 066 store j-1
+C03F 067 jump up to restart inner loop
+3001 068 load i
+5007 069 i++
+4001 06A store i
+B009 06B load val of 9
+B007 06C val--
+B009 06D store val
+B008 06E load val of 8
+B007 06F val--
+B008 070 store val
+300A 071 load ten		if(10 - i <= 0)
+6001 072 subtract i
+B007 073 subtract 1
+D079 074 exit whole loop
+E079 075
+C038 076 jump up to restart inner loop
+B000 077
+B000 078
+300D 079 	load 	adit 	form the instruction to add a[i]
+5005 07A	add 	k
+407C 07B 	store 	doit 	plant the instruction into the program
+0000 07C doit
+1800 07D print
+3005 07E load k
+601C 07F sub 9
+D085 080 if(k-9 == 0) stop printing
+3005 081 load k
+5007 082 k++
+4005 083 store k
+C079 084
+0000 085	halt

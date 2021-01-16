@@ -1,0 +1,10 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+  string t = "";
+  cout << "Please input a name to have a loving message created about them" << endl;
+  cin >> t;
+  cout << t+ " is very loving and so special, some may say they're the most loving ever." << endl;
+}
